@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 public class Intake {
     private final DcMotorEx intake;
-
     public Intake(LinearOpMode opMode) {
         intake = opMode.hardwareMap.get(DcMotorEx.class, "intake");
     }
