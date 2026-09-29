@@ -14,7 +14,8 @@ public class Scheduler {
     Map<Subsystem, Command> requirementsMap = new HashMap<>();
 
 
-    void cancel(Command command) {
+    public void cancel(Command command) {
+        if (command == null) return;
         command.end(true);
         scheduledCommands.remove(command);
         removeRequirements(command);
@@ -66,7 +67,7 @@ public class Scheduler {
     }
 
     public boolean isScheduled(Command command) {
-        return scheduledCommands.contains(command);
+        return command != null && scheduledCommands.contains(command);
     }
 
     private Set<Command> getConflicts(Command command) {

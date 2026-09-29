@@ -4,7 +4,6 @@ public class ButtonHandler {
 
     private boolean previousState;
     private boolean currentState;
-
     private long pressedTime;
 
     public void update(boolean state) {

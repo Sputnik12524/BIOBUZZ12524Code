@@ -104,9 +104,7 @@ public class GamepadManager {
         return leftTrigger;
     }
 
-    public double rightTrigger() {
-        return rightTrigger;
-    }
+    public double rightTrigger() {return rightTrigger;}
 
     public void reset() {
         A.reset();
