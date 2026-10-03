@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.input;
 
-import com.qualcomm.robotcore.hardware.Gamepad;
-
 import org.firstinspires.ftc.teamcode.command.Command;
 import org.firstinspires.ftc.teamcode.command.Scheduler;
 
@@ -11,15 +9,15 @@ import java.util.function.Supplier;
 public class CommandBindings {
     BindingMode mode;
     ButtonHandler button;
-    Supplier<Command> commandsFactory;
+    Supplier<Command> commandFactory;
     private Command activeCommand;
 
-    public CommandBindings(BindingMode mode,
-                           ButtonHandler button,
-                           Supplier<Command> commandsFactory) {
+    public CommandBindings(ButtonHandler button,
+                           BindingMode mode,
+                           Supplier<Command> commandFactory) {
         this.mode = mode;
         this.button = button;
-        this.commandsFactory = commandsFactory;
+        this.commandFactory = commandFactory;
 
     }
 
@@ -27,30 +25,31 @@ public class CommandBindings {
         switch (mode) {
             case HELD:
                 if (button.wasPressed()) {
-                    //activeCommand = commandsFactory.get();
+                    activeCommand = commandFactory.get();
                     scheduler.schedule(activeCommand);
                 }
-                if (activeCommand != null) {
-                    if (button.wasReleased()) {
-                        scheduler.cancel(activeCommand);
-                    }
+                if (activeCommand != null && button.wasReleased()) {
+                    scheduler.cancel(activeCommand);
                     activeCommand = null;
                 }
-
+                break;
             case PRESS:
                 if (button.wasPressed()) {
-
+                    scheduler.schedule(commandFactory.get());
                 }
+                break;
             case TOGGLE:
                 if (button.wasPressed()) {
                     if (activeCommand == null || !scheduler.isScheduled(activeCommand)) {
-                        //activeCommand = commandsFactory.get();
+                        activeCommand = commandFactory.get();
 
                         scheduler.schedule(activeCommand);
                     } else {
-
+                        scheduler.cancel(activeCommand);
+                        activeCommand = null;
                     }
                 }
+                break;
         }
     }
 }

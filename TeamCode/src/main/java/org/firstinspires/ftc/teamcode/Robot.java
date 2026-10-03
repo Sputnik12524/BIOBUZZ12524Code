@@ -1,25 +1,31 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.command.Scheduler;
+import org.firstinspires.ftc.teamcode.input.GamepadManager;
 import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 
 public class Robot {
     public final Scheduler scheduler;
-    public final Transfer transfer;
+    public final Transfer tr;
 
     public Robot(LinearOpMode opMode) {
         scheduler = new Scheduler();
-        transfer = new Transfer(opMode);
+        tr = new Transfer(opMode);
+
     }
 
-    public void init(){
-        transfer.init();
+    public void update() {
+        scheduler.run();
+        tr.update();
     }
 
-    public void stop(){
-        transfer.stop();
+    public void init() {
+        tr.init();
+    }
+
+    public void stop() {
+        tr.stop();
     }
 }

@@ -33,16 +33,20 @@ public class Transfer implements Subsystem {
         this.state = state;
     }
 
-    public void update(){
-        switch (state){
+    public void update() {
+        switch (state) {
             case IDLE:
                 transfer.setPower(0);
+                break;
             case IN:
                 transfer.setPower(POWER_IN);
+                break;
             case OUT:
                 transfer.setPower(POWER_OUT);
+                break;
             case STOP:
                 transfer.setPower(0);
+                break;
 
         }
     }
