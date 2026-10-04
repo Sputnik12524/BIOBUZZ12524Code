@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.input.Bindings;
+package org.firstinspires.ftc.teamcode.input.bindings;
 
 import org.firstinspires.ftc.teamcode.command.Command;
 import org.firstinspires.ftc.teamcode.command.Scheduler;

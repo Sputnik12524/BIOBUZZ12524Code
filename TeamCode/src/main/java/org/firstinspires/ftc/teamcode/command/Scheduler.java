@@ -9,30 +9,15 @@ import java.util.Map;
 import java.util.Set;
 
 public class Scheduler {
-    private final HashSet<Command> conflicts = new HashSet<>();
+    private final HashSet<Command> conflicts = new HashSet<>(); // ради оптимизации
     private Set<Command> scheduledCommands = new HashSet<>();
     private Map<Subsystem, Command> requirementsMap = new HashMap<>();
-    private Map<Subsystem, Command> defaultCommands = new HashMap<>();
-
-
-    public void setDefaultCommand(Command command) {
-        for (Subsystem subsystem : command.getRequirements()) {
-            defaultCommands.put(subsystem, command);
-        }
-    }
-
-    public void runDefaultCommands() {
-        for (Command command : defaultCommands.values()) {
-            if (defaultCommands.get(command.getRequirements()) != null
-                    && !isScheduled(command)) schedule(command);
-        }
-    }
 
     public void cancel(Command command) {
         if (command == null) return;
         if (!scheduledCommands.remove(command)) return;
-        command.end(true);
         removeRequirements(command);
+        command.end(true);
 
     }
 
@@ -44,9 +29,9 @@ public class Scheduler {
         requirementsMap.clear();
     }
 
-    public void schedule(Command command) {
-        if (isScheduled(command)) return;
-        if (!getConflicts(command)) return;
+    public boolean schedule(Command command) {
+        if (isScheduled(command)) return false;
+        if (!getConflicts(command)) return false;
 
         for (Command deleteCommand : conflicts) {
             cancel(deleteCommand);
@@ -57,13 +42,14 @@ public class Scheduler {
             requirementsMap.put(requirement, command);
         }
         command.initialize();
+        return true;
     }
 
     public void run() {
         Iterator<Command> iterator = scheduledCommands.iterator();
         while (iterator.hasNext()) {
             Command command = iterator.next();
-            command.execute();
+            command.execute();     //не делаем внутри execute действия с scheduler
             if (command.isFinished()) {
                 command.end(false);
                 removeRequirements(command);
@@ -71,7 +57,6 @@ public class Scheduler {
             }
 
         }
-        runDefaultCommands();
     }
 
     private void removeRequirements(Command command) {
@@ -92,7 +77,7 @@ public class Scheduler {
         for (Subsystem sub : requirements) {
             Command conflict = requirementsMap.get(sub);
             if (conflict != null) {
-                if (conflict.getPriority() >= command.getPriority()) return false;
+                if (conflict.getPriority() > command.getPriority()) return false;
                 else conflicts.add(conflict);
             }
         }

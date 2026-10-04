@@ -6,11 +6,19 @@ import java.util.Set;
 
 public interface Command {
     void initialize();
-    void execute();
-    boolean isFinished();
+
+    default void execute() {
+    }
+
+    default boolean isFinished() {
+        return false;
+    }
+
     void end(boolean interrupted);
+
     Set<Subsystem> getRequirements();
-    default int getPriority(){
+
+    default int getPriority() {
         return 0;
     }
 }

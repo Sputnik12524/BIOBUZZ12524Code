@@ -1,26 +1,21 @@
-package org.firstinspires.ftc.teamcode.input.Bindings;
+package org.firstinspires.ftc.teamcode.input.bindings;
 
-import org.firstinspires.ftc.teamcode.R;
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.command.Scheduler;
-import org.firstinspires.ftc.teamcode.command.commands.TransferInCommand;
-import org.firstinspires.ftc.teamcode.command.commands.TransferOutCommand;
+import org.firstinspires.ftc.teamcode.command.commands.TransferCommand;
 import org.firstinspires.ftc.teamcode.input.BindingMode;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
+import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 
 
 public class TransferBindings extends Binding {
-    Scheduler scheduler;
     Robot robot;
     GamepadManager gamepad;
 
     public TransferBindings(
-            Scheduler scheduler,
             Robot robot,
             GamepadManager gamepad
     ) {
-        super(scheduler);
-        this.scheduler = scheduler;
+        super(robot.scheduler);
         this.robot = robot;
         this.gamepad = gamepad;
     }
@@ -29,12 +24,12 @@ public class TransferBindings extends Binding {
         bind(
                 gamepad.A,
                 BindingMode.TOGGLE,
-                () -> new TransferInCommand(robot.tr)
+                () -> new TransferCommand(robot.tr, Transfer.STATES.IN)
         );
         bind(
                 gamepad.B,
                 BindingMode.TOGGLE,
-                () -> new TransferOutCommand(robot.tr)
+                () -> new TransferCommand(robot.tr, Transfer.STATES.OUT)
         );
     }
 }

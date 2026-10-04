@@ -4,30 +4,25 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Robot;
-
-import org.firstinspires.ftc.teamcode.input.Bindings.TransferBindings;
-
-import org.firstinspires.ftc.teamcode.input.GamepadManager;
+import org.firstinspires.ftc.teamcode.input.bindings.TransferBindings;
 
 
 @TeleOp(name = "Transfer Test", group = "test")
 public class TransferTest extends LinearOpMode {
     Robot robot;
-    GamepadManager gamepad;
-    private TransferBindings binding;
+    TransferBindings bindings;
 
     public void runOpMode() {
-        robot = new Robot(this);
-        gamepad = new GamepadManager(gamepad1);
-        binding = new TransferBindings(robot.scheduler, robot, gamepad);
-        binding.configure();
+        robot = new Robot(hardwareMap, gamepad1, gamepad2);
+        bindings = new TransferBindings(robot, robot.gamepad1);
+        robot.init();
+        bindings.configure();
 
         waitForStart();
         while (opModeIsActive()) {
-
-            gamepad.update();
+            bindings.update();
             robot.update();
-            binding.update();
+
         }
     }
 

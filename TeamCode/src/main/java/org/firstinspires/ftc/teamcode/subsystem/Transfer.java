@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -9,14 +8,14 @@ public class Transfer implements Subsystem {
     private final double POWER_IN = 1;
     private final double POWER_OUT = -1;
 
-    public enum STATES {IDLE, IN, OUT, STOP}
+    public enum STATES {IDLE, IN, OUT}
 
-    STATES state;
+    STATES state = STATES.IDLE;
 
     private final DcMotorEx transfer;
 
-    public Transfer(LinearOpMode opMode) {
-        transfer = opMode.hardwareMap.get(DcMotorEx.class, "transfer");
+    public Transfer(HardwareMap hardwareMap) {
+        transfer = hardwareMap.get(DcMotorEx.class, "transfer");
     }
 
     public void init() {
@@ -26,7 +25,8 @@ public class Transfer implements Subsystem {
     }
 
     public void stop() {
-        setState(STATES.STOP);
+        setState(STATES.IDLE);
+        transfer.setPower(0);
     }
 
     public void setState(STATES state) {
@@ -43,9 +43,6 @@ public class Transfer implements Subsystem {
                 break;
             case OUT:
                 transfer.setPower(POWER_OUT);
-                break;
-            case STOP:
-                transfer.setPower(0);
                 break;
 
         }

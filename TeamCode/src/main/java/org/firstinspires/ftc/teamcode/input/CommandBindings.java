@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.command.Scheduler;
 
 import java.util.function.Supplier;
 
-public class CommandBindings {
+public class    CommandBindings {
     BindingMode mode;
     ButtonHandler button;
     Supplier<Command> commandFactory;
@@ -26,7 +26,8 @@ public class CommandBindings {
             case HELD:
                 if (button.wasPressed()) {
                     activeCommand = commandFactory.get();
-                    scheduler.schedule(activeCommand);
+                    if (!scheduler.schedule(activeCommand)) activeCommand = null;
+
                 }
                 if (activeCommand != null && button.wasReleased()) {
                     scheduler.cancel(activeCommand);
@@ -42,8 +43,7 @@ public class CommandBindings {
                 if (button.wasPressed()) {
                     if (activeCommand == null || !scheduler.isScheduled(activeCommand)) {
                         activeCommand = commandFactory.get();
-
-                        scheduler.schedule(activeCommand);
+                        if (!scheduler.schedule(activeCommand)) activeCommand = null;
                     } else {
                         scheduler.cancel(activeCommand);
                         activeCommand = null;

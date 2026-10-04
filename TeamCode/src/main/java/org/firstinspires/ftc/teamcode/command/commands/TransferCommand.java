@@ -6,24 +6,19 @@ import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 
 import java.util.Set;
 
-public class TransferOutCommand implements Command {
-    private Set<Subsystem> requirements;
+public class TransferCommand implements Command {
+    private final Set<Subsystem> requirements;
+    private final Transfer.STATES state;
     Transfer tr;
 
-    public TransferOutCommand(Transfer tr) {
+    public TransferCommand(Transfer tr, Transfer.STATES state) {
         this.tr = tr;
+        this.state = state;
         requirements = Set.of(tr);
     }
 
     public void initialize() {
-        tr.setState(Transfer.STATES.IDLE);
-    }
-
-    public void execute() {
-    }
-
-    public boolean isFinished() {
-        return false;
+        tr.setState(state);
     }
 
     public void end(boolean interrupted) {
