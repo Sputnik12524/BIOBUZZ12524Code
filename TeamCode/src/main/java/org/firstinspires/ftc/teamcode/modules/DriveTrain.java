@@ -4,16 +4,20 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class DriveTrain {
-    public  final DcMotorEx leftFront;
-    public  final DcMotorEx leftBack;
-    public  final DcMotorEx rightFront;
-    public  final DcMotorEx rightBack;
+    public final DcMotorEx leftFront;
+    public final DcMotorEx leftBack;
+    public final DcMotorEx rightFront;
+    public final DcMotorEx rightBack;
+    public final Servo blocker;
 
 
-    public  static double multiplier = 1;
+    public static double multiplier = 1;
+    public static double POSITION_FOR_SHOOT = 0;
+    public static double POSITION_FOR_REMOVAL = 0;
 
 
     public DriveTrain(LinearOpMode opMode) {
@@ -21,6 +25,7 @@ public class DriveTrain {
         this.leftBack = opMode.hardwareMap.get(DcMotorEx.class, "leftBack");
         this.rightFront = opMode.hardwareMap.get(DcMotorEx.class, "rightFront");
         this.rightBack = opMode.hardwareMap.get(DcMotorEx.class, "rightBack");
+        this.blocker = opMode.hardwareMap.get(Servo.class, "blockerServo");
 
         leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
         leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -51,6 +56,13 @@ public class DriveTrain {
         rightBack.setPower(multiplier * (main + side - rotation));
     }
 
+    public void PositionForShoot() {
+        blocker.setPosition(POSITION_FOR_SHOOT);
+    }
+
+    public void PositionForRemoval() {
+        blocker.setPosition(POSITION_FOR_REMOVAL);
+    }
 
 
 }
