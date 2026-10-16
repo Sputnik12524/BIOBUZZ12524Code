@@ -31,7 +31,7 @@ public class Scheduler {
 
     public boolean schedule(Command command) {
         if (isScheduled(command)) return false;
-        if (!getConflicts(command)) return false;
+        if (!haveConflicts(command)) return false;
 
         for (Command deleteCommand : conflicts) {
             cancel(deleteCommand);
@@ -71,7 +71,7 @@ public class Scheduler {
         return command != null && scheduledCommands.contains(command);
     }
 
-    private boolean getConflicts(Command command) {
+    private boolean haveConflicts(Command command) {
         conflicts.clear();
         Set<Subsystem> requirements = command.getRequirements();
         for (Subsystem sub : requirements) {

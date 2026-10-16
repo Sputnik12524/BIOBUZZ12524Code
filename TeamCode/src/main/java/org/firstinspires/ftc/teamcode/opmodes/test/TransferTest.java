@@ -20,8 +20,8 @@ public class TransferTest extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
-            bindings.update();
             robot.update();
+            bindings.update();
 
         }
     }
