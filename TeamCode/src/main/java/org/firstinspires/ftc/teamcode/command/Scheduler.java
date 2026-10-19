@@ -5,12 +5,13 @@ import org.firstinspires.ftc.teamcode.subsystem.Subsystem;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class Scheduler {
     private final HashSet<Command> conflicts = new HashSet<>(); // ради оптимизации
-    private Set<Command> scheduledCommands = new HashSet<>();
+    private Set<Command> scheduledCommands = new LinkedHashSet<>();
     private Map<Subsystem, Command> requirementsMap = new HashMap<>();
 
     public void cancel(Command command) {
