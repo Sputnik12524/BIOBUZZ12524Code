@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.hardware.VoltageSensor;
 @Config
 public class Shooter {
 
-    public final DcMotorEx shooterUp;
-    public final DcMotorEx shooterDown;
+    public final DcMotorEx shooterUpper;
+    public final DcMotorEx shooterLower;
 
     final VoltageSensor batteryVoltage;
 
@@ -24,21 +24,21 @@ public class Shooter {
     public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0,0,0,0);
 
     public Shooter(LinearOpMode opMode) {
-        shooterUp = opMode.hardwareMap.get(DcMotorEx.class, "shooterUp");
-        shooterDown = opMode.hardwareMap.get(DcMotorEx.class, "shooterDown");
+        shooterUpper = opMode.hardwareMap.get(DcMotorEx.class, "shooterUp");
+        shooterLower = opMode.hardwareMap.get(DcMotorEx.class, "shooterDown");
 
         batteryVoltage = opMode.hardwareMap.voltageSensor.iterator().next();
 
-        shooterDown.setDirection(DcMotorEx.Direction.REVERSE);
+        shooterLower.setDirection(DcMotorEx.Direction.REVERSE);
 
-        shooterUp.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        shooterDown.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        shooterUpper.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        shooterLower.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        shooterUp.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        shooterDown.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterUpper.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterLower.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        setPIDFCoefficients(shooterUp, pidfCoefficients);
-        setPIDFCoefficients(shooterDown, pidfCoefficients);
+        setPIDFCoefficients(shooterUpper, pidfCoefficients);
+        setPIDFCoefficients(shooterLower, pidfCoefficients);
     }
 
     public void setPIDFCoefficients(DcMotorEx motor, PIDFCoefficients coefficients) {
@@ -48,21 +48,28 @@ public class Shooter {
     }
 
     public void setPower(double power) {
-        shooterUp.setPower(power);
-        shooterDown.setPower(power);
+        shooterUpper.setPower(power);
+        shooterLower.setPower(power);
     }
 
-    public void setTarget(double newTarget) {
+    public void setTargetVelo(double newTarget) {
         target = newTarget;
     }
 
-    public void setVelocity() {
-        shooterUp.setVelocity(target);
-        shooterDown.setVelocity(target);
+    public void shootByVelo() {
+        shooterUpper.setVelocity(target);
+        shooterLower.setVelocity(target);
+    }
+    public void shootStop(){
+        shooterUpper.setVelocity(0);
+        shooterLower.setVelocity(0);
     }
 
-    public double getVelocity() {
-        return  shooterUp.getVelocity();
+    public double getVelocityUpper() {
+        return  shooterUpper.getVelocity();
+    }
+    public double getVelocityLower() {
+        return shooterLower.getVelocity();
     }
     public double convertRPStoTPS(double rps) {
         return rps*TICKS_PER_REV;
