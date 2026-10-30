@@ -16,12 +16,6 @@ public class ShooterCommand implements Command {
         this.state = state;
         requirements = Set.of(sh);
     }
-    public ShooterCommand(Shooter sh, Shooter.ShooterStates state, double targetVelocity) {
-        this.sh = sh;
-        sh.setTargetVelo(targetVelocity);
-        this.state = state;
-        requirements = Set.of(sh);
-    }
 
     public void initialize() {
         sh.setState(state);

@@ -10,7 +10,6 @@ import org.firstinspires.ftc.teamcode.subsystem.Shooter;
 public class ShooterBindings extends Binding {
     Robot robot;
     GamepadManager gamepad;
-    public static double targetVelo = Shooter.targetVelo;
 
     public ShooterBindings(
             Robot robot,
@@ -25,7 +24,7 @@ public class ShooterBindings extends Binding {
         bind(
                 gamepad.A,
                 BindingMode.TOGGLE,
-                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_VELO, targetVelo)
+                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_VELO)
         );
         bind(
                 gamepad.B,
