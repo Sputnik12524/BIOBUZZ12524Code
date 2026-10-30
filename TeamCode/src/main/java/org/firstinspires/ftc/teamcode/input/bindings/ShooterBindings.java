@@ -28,7 +28,7 @@ public class ShooterBindings extends Binding {
         );
         bind(
                 gamepad.B,
-                BindingMode.HELD,
+                BindingMode.TOGGLE,
                 () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_POWER)
         );
     }

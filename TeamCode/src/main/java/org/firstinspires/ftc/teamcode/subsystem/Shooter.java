@@ -24,7 +24,7 @@ public class Shooter implements Subsystem{
     double RPS = 50;
     double GEAR_RATIO = 1;
 
-    public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0,0,0,0);
+    public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(1,0,0,1);
 
     public ShooterStates state = ShooterStates.IDLE;
 
@@ -44,8 +44,8 @@ public class Shooter implements Subsystem{
         shooterUpper.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooterLower.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        setPIDFCoefficients(shooterUpper, pidfCoefficients);
-        setPIDFCoefficients(shooterLower, pidfCoefficients);
+       // setPIDFCoefficients(shooterUpper, pidfCoefficients);
+       // setPIDFCoefficients(shooterLower, pidfCoefficients);
 
         setState(ShooterStates.IDLE);
     }
@@ -71,8 +71,7 @@ public class Shooter implements Subsystem{
 
     @Override
     public void stop() {
-        shooterUpper.setVelocity(0);
-        shooterLower.setVelocity(0);
+        setState(ShooterStates.IDLE);
     }
 
     public void setPIDFCoefficients(DcMotorEx motor, PIDFCoefficients coefficients) {
@@ -100,6 +99,10 @@ public class Shooter implements Subsystem{
     }
     public double getVelocityLower() {
         return shooterLower.getVelocity();
+    }
+    public double getPower(){return shooterUpper.getPower();}
+    public ShooterStates getState() {
+        return state;
     }
     public double convertRPStoTPS(double rps) {
         return rps*TICKS_PER_REV;

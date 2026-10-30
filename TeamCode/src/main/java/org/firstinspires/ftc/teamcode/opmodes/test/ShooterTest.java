@@ -24,6 +24,9 @@ public class ShooterTest extends LinearOpMode {
         while (opModeIsActive()) {
             robot.update();
             bindings.update();
+            telemetry.addData("power", robot.sh.getPower());
+            telemetry.addData("state", robot.sh.getState());
+            telemetry.update();
         }
     }
 
