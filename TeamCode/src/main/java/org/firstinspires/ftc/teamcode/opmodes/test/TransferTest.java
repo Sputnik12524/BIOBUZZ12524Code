@@ -13,17 +13,21 @@ public class TransferTest extends LinearOpMode {
     TransferBindings bindings;
 
     public void runOpMode() {
-        robot = new Robot(hardwareMap, gamepad1, gamepad2);
-        bindings = new TransferBindings(robot, robot.gamepad1);
-        robot.init();
-        bindings.configure();
+        try {
+            robot = new Robot(hardwareMap, gamepad1, gamepad2);
+            bindings = new TransferBindings(robot, robot.gamepad1);
+            robot.init();
+            bindings.configure();
 
-        waitForStart();
-        while (opModeIsActive()) {
-            robot.update();
-            bindings.update();
+            waitForStart();
+            while (opModeIsActive()) {
+                robot.updateInput();
+                bindings.update();
+                robot.update();
 
+            }
+        } finally {
+            robot.stop();
         }
     }
-
 }
