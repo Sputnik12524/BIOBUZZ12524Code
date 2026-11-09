@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.event.EventBus;
+import org.firstinspires.ftc.teamcode.event.Subscription;
 import org.firstinspires.ftc.teamcode.event.events.PollenInTransferEvent;
 import org.firstinspires.ftc.teamcode.event.events.TransferOvercrowdedEvent;
 
@@ -22,13 +23,16 @@ public class Transfer implements Subsystem {
 
     private final DcMotorEx transfer;
     private final EventBus eventBus;
+    private final Subscription pollenInTransferEvent;
 
     public Transfer(HardwareMap hardwareMap, EventBus eventBus) {
         this.eventBus = eventBus;
         transfer = hardwareMap.get(DcMotorEx.class, "transfer");
-        eventBus.subscribe(PollenInTransferEvent.class, event -> { // Конечно шина событий используется для взаимодействий между подсистемами, а не внутри одной, но у меня только трансфер
+         pollenInTransferEvent = eventBus.subscribe(PollenInTransferEvent.class, event -> { // Конечно шина событий используется для взаимодействий между подсистемами, а не внутри одной, но у меня только трансфер
             if (event.getCount() > 3) eventBus.publish(new TransferOvercrowdedEvent());
         });
+        pollenInTransferEvent.unsubscribe();
+
     }
 
     public void init() {

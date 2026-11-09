@@ -70,7 +70,7 @@ public class EventBus {
         }
     }
 
-    void remove(Registration<?> registration) {
+    public void remove(Registration<?> registration) {
         clientList.remove(registration);
     }
 
