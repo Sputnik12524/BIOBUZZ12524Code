@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.command.Scheduler;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
+import org.firstinspires.ftc.teamcode.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.subsystem.Subsystem;
 import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 
@@ -15,6 +16,7 @@ public class Robot {
     List<Subsystem> subsystem= new ArrayList<>();
     public final Scheduler scheduler;
     public final Transfer tr;
+    public  final Intake in;
     public final GamepadManager gamepad1;
     public final GamepadManager gamepad2;
 
@@ -23,7 +25,9 @@ public class Robot {
         gamepad2 = new GamepadManager(rawGamepad2);
         scheduler = new Scheduler();
         tr = new Transfer(hardwareMap);
+        in = new Intake(hardwareMap);
         subsystem.add(tr);
+        subsystem.add(in);
     }
 
     public void update() {
