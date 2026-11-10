@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.command.Scheduler;
 
 import java.util.function.Supplier;
 
-public class    CommandBindings {
+public class CommandBindings {
     BindingMode mode;
     ButtonHandler button;
     Supplier<Command> commandFactory;

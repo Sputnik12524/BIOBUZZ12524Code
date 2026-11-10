@@ -1,28 +1,28 @@
 package org.firstinspires.ftc.teamcode.command.commands;
 
 import org.firstinspires.ftc.teamcode.command.Command;
+import org.firstinspires.ftc.teamcode.subsystem.Shooter;
 import org.firstinspires.ftc.teamcode.subsystem.Subsystem;
-import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 
 import java.util.Set;
 
-public class TransferCommand implements Command {
+public class ShooterCommand implements Command {
     private final Set<Subsystem> requirements;
-    private final Transfer.STATES state;
-    Transfer tr;
+    private final Shooter.ShooterStates state;
+    Shooter sh;
 
-    public TransferCommand(Transfer tr, Transfer.STATES state) {
-        this.tr = tr;
+    public ShooterCommand(Shooter sh, Shooter.ShooterStates state) {
+        this.sh = sh;
         this.state = state;
-        requirements = Set.of(tr);
+        requirements = Set.of(sh);
     }
 
     public void initialize() {
-        tr.setState(state);
+        sh.setState(state);
     }
 
     public void end(boolean interrupted) {
-        tr.stop();
+        sh.stop();
     }
 
     public Set<Subsystem> getRequirements() {
@@ -30,6 +30,6 @@ public class TransferCommand implements Command {
     }
 
     public int getPriority() {
-        return 50;
+        return 1;
     }
 }

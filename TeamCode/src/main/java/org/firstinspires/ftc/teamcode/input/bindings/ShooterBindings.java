@@ -1,17 +1,17 @@
 package org.firstinspires.ftc.teamcode.input.bindings;
 
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.command.commands.TransferCommand;
+import org.firstinspires.ftc.teamcode.command.commands.ShooterCommand;
 import org.firstinspires.ftc.teamcode.input.BindingMode;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
-import org.firstinspires.ftc.teamcode.subsystem.Transfer;
+import org.firstinspires.ftc.teamcode.subsystem.Shooter;
 
 
-public class TransferBindings extends Binding {
+public class ShooterBindings extends Binding {
     Robot robot;
     GamepadManager gamepad;
 
-    public TransferBindings(
+    public ShooterBindings(
             Robot robot,
             GamepadManager gamepad
     ) {
@@ -24,12 +24,12 @@ public class TransferBindings extends Binding {
         bind(
                 gamepad.A,
                 BindingMode.TOGGLE,
-                () -> new TransferCommand(robot.tr, Transfer.STATES.IN)
+                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_VELO)
         );
         bind(
                 gamepad.B,
                 BindingMode.TOGGLE,
-                () -> new TransferCommand(robot.tr, Transfer.STATES.OUT)
+                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_POWER)
         );
     }
 }
