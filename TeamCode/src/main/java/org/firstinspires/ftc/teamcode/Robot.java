@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.command.Scheduler;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
+import org.firstinspires.ftc.teamcode.subsystem.DriveTrain;
 import org.firstinspires.ftc.teamcode.subsystem.Shooter;
 import org.firstinspires.ftc.teamcode.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.subsystem.Subsystem;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Robot {
     List<Subsystem> subsystem= new ArrayList<>();
     public final Scheduler scheduler;
+    public final DriveTrain dt;
     public final Shooter sh;
     public final Transfer tr;
     public  final Intake in;
@@ -25,9 +27,11 @@ public class Robot {
         gamepad1 = new GamepadManager(rawGamepad1);
         gamepad2 = new GamepadManager(rawGamepad2);
         scheduler = new Scheduler();
+        dt = new DriveTrain(hardwareMap);
         sh = new Shooter(hardwareMap);
         tr = new Transfer(hardwareMap);
         in = new Intake(hardwareMap);
+        subsystem.add(dt);
         subsystem.add(sh);
         subsystem.add(tr);
         subsystem.add(in);
