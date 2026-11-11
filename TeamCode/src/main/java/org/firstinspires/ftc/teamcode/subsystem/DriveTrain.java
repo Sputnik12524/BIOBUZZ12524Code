@@ -16,11 +16,11 @@ public class DriveTrain implements Subsystem {
 
     public BlockerState state = BlockerState.IDLE;
 
-    private final DcMotorEx leftFront;
-    private final DcMotorEx leftBack;
-    private final DcMotorEx rightFront;
-    private final DcMotorEx rightBack;
-    private final Servo blockerFront;
+    public final DcMotorEx leftFront;
+    public final DcMotorEx leftBack;
+    public final DcMotorEx rightFront;
+    public final DcMotorEx rightBack;
+    public final Servo blockerFront;
     public final Servo blockerBack;
 
 
