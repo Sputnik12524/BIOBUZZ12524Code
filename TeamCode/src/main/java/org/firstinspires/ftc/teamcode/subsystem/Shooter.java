@@ -47,8 +47,8 @@ public class Shooter implements Subsystem{
         shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooterLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-       // setPIDFCoefficients(shooterUpper, pidfCoefficients);
-       // setPIDFCoefficients(shooterLower, pidfCoefficients);
+        setPIDFCoefficients(shooterRight, pidfCoefficients);
+        setPIDFCoefficients(shooterLeft, pidfCoefficients);
 
         setState(ShooterStates.IDLE);
     }

@@ -29,4 +29,5 @@ dependencies {
     implementation 'com.pedropathing:telemetry:1.0.0'
     //implementation 'com.bylazar:fullpanels:1.0.9'
     implementation "com.bylazar:docs:1.0.5"
+    implementation 'com.pedropathing.ivy:pedro:1.1.1'
 }
