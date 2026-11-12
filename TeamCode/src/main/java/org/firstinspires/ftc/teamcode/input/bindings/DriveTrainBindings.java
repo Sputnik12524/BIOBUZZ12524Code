@@ -25,12 +25,12 @@ public class DriveTrainBindings extends Binding {
         bind(
                 gamepad.X,
                 BindingMode.TOGGLE,
-                () -> new DriveTrainCommand(robot.dt, DriveTrain.BlockerState.IDLE)
+                () -> new DriveTrainCommand(robot.dt, DriveTrain.DriveState.IDLE)
         );
         bind(
                 gamepad.Y,
                 BindingMode.TOGGLE,
-                () -> new DriveTrainCommand(robot.dt, DriveTrain.BlockerState.BLOCKER_FOR_SHOT)
+                () -> new DriveTrainCommand(robot.dt, DriveTrain.DriveState.BLOCKER_FOR_SHOT)
         );
 
     }

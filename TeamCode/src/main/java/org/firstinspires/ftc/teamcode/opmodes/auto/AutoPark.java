@@ -29,7 +29,7 @@ public class AutoPark extends LinearOpMode {
                 dt.rightFront.setPower(POWER);
                 dt.rightBack.setPower(POWER);
             }
-            dt.setState(DriveTrain.BlockerState.IDLE);
+            dt.setState(DriveTrain.DriveState.IDLE);
         }
     }
 }

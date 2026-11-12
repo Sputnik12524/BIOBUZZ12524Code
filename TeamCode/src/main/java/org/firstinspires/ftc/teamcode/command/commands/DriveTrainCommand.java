@@ -8,10 +8,10 @@ import java.util.Set;
 
 public class DriveTrainCommand implements Command {
     private final Set<Subsystem> requirements;
-    private final DriveTrain.BlockerState state;
+    private final DriveTrain.DriveState state;
     DriveTrain dt;
 
-    public DriveTrainCommand (DriveTrain dt, DriveTrain.BlockerState state){
+    public DriveTrainCommand (DriveTrain dt, DriveTrain.DriveState state){
         this.dt = dt;
         this.state = state;
         requirements = Set.of(dt);

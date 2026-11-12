@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.auto.blueByPedro;
+package org.firstinspires.ftc.teamcode.opmodes.auto.pedro.blueByPedro;
 
 import static com.pedropathing.api.Paths.line;
 import static com.pedropathing.ivy.Scheduler.schedule;
