@@ -1,10 +1,7 @@
-package org.firstinspires.ftc.teamcode.input.bindings;
+package org.firstinspires.ftc.teamcode.input;
 
 import org.firstinspires.ftc.teamcode.command.Command;
 import org.firstinspires.ftc.teamcode.command.Scheduler;
-import org.firstinspires.ftc.teamcode.input.BindingMode;
-import org.firstinspires.ftc.teamcode.input.ButtonHandler;
-import org.firstinspires.ftc.teamcode.input.CommandBindings;
 
 import java.util.ArrayList;
 import java.util.List;

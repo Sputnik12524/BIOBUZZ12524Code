@@ -1,11 +1,10 @@
-package org.firstinspires.ftc.teamcode.input.bindings;
-
-import com.qualcomm.robotcore.hardware.Gamepad;
+package org.firstinspires.ftc.teamcode.input.bindings.TestBindings;
 
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.command.commands.DriveTrainCommand;
 import org.firstinspires.ftc.teamcode.input.BindingMode;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
+import org.firstinspires.ftc.teamcode.input.Binding;
 import org.firstinspires.ftc.teamcode.subsystem.DriveTrain;
 
 public class DriveTrainBindings extends Binding {
@@ -25,12 +24,12 @@ public class DriveTrainBindings extends Binding {
         bind(
                 gamepad.X,
                 BindingMode.TOGGLE,
-                () -> new DriveTrainCommand(robot.dt, DriveTrain.BlockerState.IDLE)
+                () -> new DriveTrainCommand(robot.dt, DriveTrain.DriveState.IDLE)
         );
         bind(
                 gamepad.Y,
                 BindingMode.TOGGLE,
-                () -> new DriveTrainCommand(robot.dt, DriveTrain.BlockerState.BLOCKER_FOR_SHOT)
+                () -> new DriveTrainCommand(robot.dt, DriveTrain.DriveState.BLOCKER_FOR_SHOT)
         );
 
     }

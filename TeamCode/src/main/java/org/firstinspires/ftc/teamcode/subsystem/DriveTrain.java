@@ -11,10 +11,13 @@ public class DriveTrain implements Subsystem {
     public static double POSITION_FOR_SHOOT = 0.08; //При тесте подошло 0.08, но был 1 блокиратор. Нужен тест для второго
     public static double POSITION_FOR_REMOVAL = 0;
     public static double multiplier = 1;
+    public double power_main = 1;
+    public double power_rotate = 1;
+    public double power_side = 1;
 
-    public enum BlockerState {IDLE, BLOCKER_FOR_SHOT}
+    public enum DriveState {IDLE, BLOCKER_FOR_SHOT, DRIVE}
 
-    public BlockerState state = BlockerState.IDLE;
+    public DriveState state = DriveState.IDLE;
 
     public final DcMotorEx leftFront;
     public final DcMotorEx leftBack;
@@ -54,13 +57,17 @@ public class DriveTrain implements Subsystem {
         rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        setState(BlockerState.IDLE);
+        setState(DriveState.IDLE);
     }
+
+
 
     public void stop() {
-        setState(BlockerState.IDLE);
+        setState(DriveState.IDLE);
     }
 
+
+    @Override
     public void update() {
         switch (state) {
             case IDLE:
@@ -74,7 +81,16 @@ public class DriveTrain implements Subsystem {
                 blockerFront.setPosition(POSITION_FOR_SHOOT);
                 blockerBack.setPosition(POSITION_FOR_SHOOT);
                 break;
+
+            case DRIVE:
+                setPower(power_main, power_side, power_rotate);
+                break;
         }
+    }
+    public void setNewTargetPower(double newMain, double newSide, double newRotate) {
+        power_main = newMain;
+        power_side = newSide;
+        power_rotate = newRotate;
     }
 
     public void setPower(double main, double side, double rotation) {
@@ -84,7 +100,7 @@ public class DriveTrain implements Subsystem {
         rightBack.setPower(multiplier * (main + side - rotation));
     }
 
-    public void setState(BlockerState state) {
+    public void setState(DriveState state) {
         this.state = state;
     }
 
