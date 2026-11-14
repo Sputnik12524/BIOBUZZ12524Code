@@ -78,8 +78,9 @@ public class Scheduler {
         for (Subsystem sub : requirements) {
             Command conflict = requirementsMap.get(sub);
             if (conflict != null) {
-                if (conflict.getPriority() > command.getPriority()) return false;
-                else conflicts.add(conflict);
+                if (conflict.canInterrupt() ||
+                        conflict.getPriority() <= command.getPriority()) conflicts.add(conflict);
+                else return false;
             }
         }
         return true;

@@ -30,8 +30,4 @@ public class IntakeCommand implements Command {
     public Set<Subsystem> getRequirements() {
         return requirements;
     }
-
-    public int getPriority() {
-        return 50;
-    }
 }

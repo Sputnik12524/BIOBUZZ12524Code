@@ -3,19 +3,24 @@ package org.firstinspires.ftc.teamcode.opmodes.tele;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.command.commands.DriveByGamepadCommand;
+import org.firstinspires.ftc.teamcode.input.bindings.TeleOpBindings;
 import org.firstinspires.ftc.teamcode.input.bindings.TestBindings.TransferBindings;
+
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp", group ="0")
 
 public class TeleOp extends LinearOpMode {
     Robot robot;
-    TransferBindings binding;
+    TeleOpBindings binding;
 
     @Override
     public void runOpMode() {
         robot = new Robot(hardwareMap, gamepad1, gamepad2);
-        binding = new TransferBindings(robot);
+        binding = new TeleOpBindings(robot);
         robot.init();
         binding.configure();
         waitForStart();
+        robot.scheduler.schedule(new DriveByGamepadCommand(robot));
 
         while (opModeIsActive()) {
             robot.update();

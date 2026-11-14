@@ -21,4 +21,8 @@ public interface Command {
     default int getPriority() {
         return 0;
     }
+
+    default boolean canInterrupt(){
+        return true;
+    }
 }
