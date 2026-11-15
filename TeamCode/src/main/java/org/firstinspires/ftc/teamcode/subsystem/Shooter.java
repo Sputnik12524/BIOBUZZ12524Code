@@ -13,18 +13,21 @@ public class Shooter implements Subsystem{
 
     public enum ShooterStates {IDLE, SHOOTING_POWER, SHOOTING_VELO}
     public final DcMotorEx shooterRight;
-    public final DcMotorEx shooterLeft;
+   // public final DcMotorEx shooterLeft;
     public final Servo angleAdjuster;
 
     final VoltageSensor batteryVoltage;
 
     public static double targetVelo = 0;
     public static double adjPose = 0;
-    public static double POWER = 1;
+    public static double POWER = 0.725;
 
     final double TICKS_PER_REV = 28;
     double RPS = 50;
     double GEAR_RATIO = 1;
+
+    public static double POS_MAX = 0.54;
+    public static double POS_MIN = 0.17;
 
     public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0,0,0,0);
 
@@ -32,23 +35,15 @@ public class Shooter implements Subsystem{
 
     public Shooter(HardwareMap hardwareMap) {
         shooterRight = hardwareMap.get(DcMotorEx.class, "shooterUp");
-        shooterLeft = hardwareMap.get(DcMotorEx.class, "shooterDown");
         angleAdjuster = hardwareMap.get(Servo.class, "adjuster");
 
         batteryVoltage = hardwareMap.voltageSensor.iterator().next();
-
-        shooterLeft.setDirection(DcMotorEx.Direction.REVERSE);
     }
     @Override
     public void init() {
-        shooterRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        shooterLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        shooterLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        setPIDFCoefficients(shooterRight, pidfCoefficients);
-        setPIDFCoefficients(shooterLeft, pidfCoefficients);
+      //  shooterRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+       // setPIDFCoefficients(shooterRight, pidfCoefficients);
 
         setState(ShooterStates.IDLE);
     }
@@ -91,7 +86,6 @@ public class Shooter implements Subsystem{
 
     public void setPower(double power) {
         shooterRight.setPower(power);
-        shooterLeft.setPower(power);
     }
 
     public void setTargetVelo(double newTarget) {
@@ -100,14 +94,13 @@ public class Shooter implements Subsystem{
 
     public void shootByVelo() {
         shooterRight.setVelocity(targetVelo);
-        shooterLeft.setVelocity(targetVelo);
     }
 
     public double getVelocityUpper() {
         return  shooterRight.getVelocity();
     }
     public double getVelocityLower() {
-        return shooterLeft.getVelocity();
+        return 0.0;
     }
     public double getPower(){return shooterRight.getPower();}
     public ShooterStates getState() {

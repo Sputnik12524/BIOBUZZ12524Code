@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystem;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
@@ -22,6 +23,7 @@ public class Intake implements Subsystem {
     }
 
     public void init() {
+        intake.setDirection(DcMotorSimple.Direction.REVERSE);
         intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         setState(STATES.IDLE);

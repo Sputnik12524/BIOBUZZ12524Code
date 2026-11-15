@@ -10,6 +10,7 @@ public class DriveTrain implements Subsystem {
 
     public static double POSITION_FOR_SHOOT = 0.08; //При тесте подошло 0.08, но был 1 блокиратор. Нужен тест для второго
     public static double POSITION_FOR_REMOVAL = 0;
+    public static double POWER = .5;
     public static double multiplier = 1;
     public double power_main = 1;
     public double power_rotate = 1;
@@ -18,7 +19,8 @@ public class DriveTrain implements Subsystem {
     public enum DriveState {IDLE, BLOCKER_FOR_SHOT, DRIVE}
 
     public DriveState state = DriveState.IDLE;
-
+    static final double PULSES = 537.7;
+    static final double WHEEL_DIAMETER = 9.6;
     public final DcMotorEx leftFront;
     public final DcMotorEx leftBack;
     public final DcMotorEx rightFront;
@@ -109,6 +111,18 @@ public class DriveTrain implements Subsystem {
         leftBack.setPower(0);
         rightFront.setPower(0);
         rightBack.setPower(0);
+    }
+    public void moveForwardByCenti(double distance) {
+        while (leftBack.getCurrentPosition() <= centiToPulses(distance)) {
+            leftFront.setPower(POWER);
+            leftBack.setPower(POWER);
+            rightFront.setPower(POWER);
+            rightBack.setPower(POWER);
+        }
+        setStopMotors();
+    }
+    public double centiToPulses(double distance) {
+        return distance * PULSES / (Math.PI * WHEEL_DIAMETER);
     }
 
 }
