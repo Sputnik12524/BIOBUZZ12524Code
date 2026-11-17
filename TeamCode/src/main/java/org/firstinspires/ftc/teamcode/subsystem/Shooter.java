@@ -21,6 +21,7 @@ public class Shooter implements Subsystem{
     public static double targetVelo = 0;
     public static double adjPose = 0;
     public static double POWER = 0.725;
+    public static double VELOCITY = 52;
 
     final double TICKS_PER_REV = 28;
     double RPS = 50;
@@ -29,7 +30,7 @@ public class Shooter implements Subsystem{
     public static double POS_MAX = 0.54;
     public static double POS_MIN = 0.17;
 
-    public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0,0,0,0);
+    public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(1.4,0,0,14.14);
 
     public ShooterStates state = ShooterStates.IDLE;
 
@@ -41,9 +42,9 @@ public class Shooter implements Subsystem{
     }
     @Override
     public void init() {
-      //  shooterRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-       // shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-       // setPIDFCoefficients(shooterRight, pidfCoefficients);
+        shooterRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        setPIDFCoefficients(shooterRight, pidfCoefficients);
 
         setState(ShooterStates.IDLE);
     }
@@ -55,7 +56,8 @@ public class Shooter implements Subsystem{
     public void update() {
         switch (state) {
             case IDLE:
-                setPower(0);
+//                setPower(0);
+                setTargetVelo(0);
                 setAdjusterPose(adjPose);
                 break;
             case SHOOTING_POWER:
@@ -63,6 +65,7 @@ public class Shooter implements Subsystem{
                 setAdjusterPose(adjPose);
                 break;
             case SHOOTING_VELO:
+                setTargetVelo(VELOCITY);
                 shootByVelo();
                 setAdjusterPose(adjPose);
                 break;

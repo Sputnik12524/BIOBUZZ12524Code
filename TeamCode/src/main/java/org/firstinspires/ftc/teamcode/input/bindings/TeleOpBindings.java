@@ -26,7 +26,7 @@ public class TeleOpBindings extends Binding {
         bind(robot.gamepad1.B, BindingMode.TOGGLE, () -> new OuttakePollenCommand(robot));
 
         bind(robot.gamepad1.X, BindingMode.TOGGLE,
-                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_POWER));
+                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_VELO));
         bind(robot.gamepad1.Y, BindingMode.TOGGLE,
                 () -> new TransferCommand(robot.tr, Transfer.STATES.SHOOTING));
 
