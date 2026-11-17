@@ -1,14 +1,12 @@
 package org.firstinspires.ftc.teamcode.input.bindings;
 
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.command.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.command.commands.IntakePollenCommand;
 import org.firstinspires.ftc.teamcode.command.commands.OuttakePollenCommand;
 import org.firstinspires.ftc.teamcode.command.commands.ShooterCommand;
 import org.firstinspires.ftc.teamcode.command.commands.TransferCommand;
 import org.firstinspires.ftc.teamcode.input.Binding;
 import org.firstinspires.ftc.teamcode.input.BindingMode;
-import org.firstinspires.ftc.teamcode.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.subsystem.Shooter;
 import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 

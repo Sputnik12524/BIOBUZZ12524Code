@@ -19,10 +19,10 @@ public class AutoBluePark extends LinearOpMode {
     Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
-    Pose startPoseE1 = p.of(117,15,90);
+    final Pose startPoseE1 = p.of(117,15,90);
     Pose startPoseE4 = p.of(132,80,-90);
     Pose startPoseE3 = p.of(132, 56, -90);
-    Pose parkPoseE1 = p.of(132, 20, 90);
+    final Pose parkPoseE1 = p.of(132, 20, 90);
     Pose parkPoseE43 = p.of(132, 48, -90);
 
     @Override

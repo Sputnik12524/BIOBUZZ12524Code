@@ -24,10 +24,10 @@ public class AutoRed1Scoring extends LinearOpMode {
     Follower follower;
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    Pose startPose = poseFactory.of(55, 9, 90);
-    Pose scoringPose = poseFactory.of(55, 26, 90);
-    Pose controlPose = poseFactory.of(16, 32, 90);
-    Pose parkPose = poseFactory.of(9, 97, 90);
+    final Pose startPose = poseFactory.of(55, 9, 90);
+    final Pose scoringPose = poseFactory.of(55, 26, 90);
+    final Pose controlPose = poseFactory.of(16, 32, 90);
+    final Pose parkPose = poseFactory.of(9, 97, 90);
 
 
     public void runOpMode() {

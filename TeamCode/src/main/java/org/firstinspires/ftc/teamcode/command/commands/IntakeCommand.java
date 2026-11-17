@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.command.commands;
 import org.firstinspires.ftc.teamcode.command.Command;
 import org.firstinspires.ftc.teamcode.subsystem.Intake;
 import org.firstinspires.ftc.teamcode.subsystem.Subsystem;
-import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 
 import java.util.Set;
 

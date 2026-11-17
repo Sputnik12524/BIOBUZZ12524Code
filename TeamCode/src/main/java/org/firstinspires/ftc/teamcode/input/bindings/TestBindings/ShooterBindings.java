@@ -6,7 +6,6 @@ import org.firstinspires.ftc.teamcode.input.BindingMode;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
 import org.firstinspires.ftc.teamcode.input.Binding;
 import org.firstinspires.ftc.teamcode.subsystem.Shooter;
-import org.firstinspires.ftc.teamcode.subsystem.Transfer;
 
 
 public class ShooterBindings extends Binding {

@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.command.commands.DriveByGamepadCommand;
 import org.firstinspires.ftc.teamcode.input.bindings.TeleOpBindings;
-import org.firstinspires.ftc.teamcode.input.bindings.TestBindings.TransferBindings;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp", group ="0")
 

@@ -21,9 +21,9 @@ public class AutoBlue1Scoring extends LinearOpMode {
     Follower follower;
     private final PoseFactory p = PoseFactory.degrees();
 
-    Pose startPoseE1 = p.of(79,9,90);
-    Pose scoringPose = p.of(84, 23, 90);
-    Pose parkPose = p.of(131, 22, 90);
+    final Pose startPoseE1 = p.of(79,9,90);
+    final Pose scoringPose = p.of(84, 23, 90);
+    final Pose parkPose = p.of(131, 22, 90);
 
     @Override
     public void runOpMode() {

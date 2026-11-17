@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.subsystem.DriveTrain;
 
 public class AutoPark extends LinearOpMode {
     DriveTrain dt;
-    static double DISTANCE = 5;
+    static final double DISTANCE = 5;
 
     @Override
     public void runOpMode() {
