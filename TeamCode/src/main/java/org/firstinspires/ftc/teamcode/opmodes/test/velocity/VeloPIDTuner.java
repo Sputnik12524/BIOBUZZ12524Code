@@ -28,7 +28,6 @@ public class VeloPIDTuner extends LinearOpMode {
         Shooter sh = new Shooter(hardwareMap);
         // Change my id
         DcMotorEx myMotor = sh.shooterRight;
-       // DcMotorEx myMotor1 = sh.shooterLeft;
 
         for (LynxModule module : hardwareMap.getAll(LynxModule.class)) {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
@@ -37,11 +36,9 @@ public class VeloPIDTuner extends LinearOpMode {
         MotorConfigurationType motorConfigurationType = myMotor.getMotorType().clone();
         motorConfigurationType.setAchieveableMaxRPMFraction(1.0);
         myMotor.setMotorType(motorConfigurationType);
-      //  myMotor1.setMotorType(motorConfigurationType);
 
         batteryVoltageSensor = hardwareMap.voltageSensor.iterator().next();
         setPIDFCoefficients(myMotor, MOTOR_VELO_PID_SHOOTERS);
-      //  setPIDFCoefficients(myMotor1, MOTOR_VELO_PID_SHOOTERS);
 
         TuningController tuningController = new TuningController();
 
@@ -70,18 +67,14 @@ public class VeloPIDTuner extends LinearOpMode {
             telemetry.addData("targetVelocity", targetVelo);
 
             double motorVelo = myMotor.getVelocity();
-         //   double motorVelo1 = myMotor1.getVelocity();
             telemetry.addData("velocityRight", motorVelo);
             telemetry.addData("errorRight", targetVelo - motorVelo);
-         //   telemetry.addData("velocityLeft", motorVelo1);
-         //   telemetry.addData("errorLeft", targetVelo - motorVelo1);
 
             telemetry.addData("upperBound", TuningController.rpmToTicksPerSecond(TuningController.TESTING_MAX_SPEED * 1.15));
             telemetry.addData("lowerBound", 0);
 
             if (lastKp != MOTOR_VELO_PID_SHOOTERS.p || lastKi != MOTOR_VELO_PID_SHOOTERS.i || lastKd != MOTOR_VELO_PID_SHOOTERS.d || lastKf != MOTOR_VELO_PID_SHOOTERS.f) {
                 setPIDFCoefficients(myMotor, MOTOR_VELO_PID_SHOOTERS);
-                // setPIDFCoefficients(myMotor1, MOTOR_VELO_PID_SHOOTERS);
 
                 lastKp = MOTOR_VELO_PID_SHOOTERS.p;
                 lastKi = MOTOR_VELO_PID_SHOOTERS.i;

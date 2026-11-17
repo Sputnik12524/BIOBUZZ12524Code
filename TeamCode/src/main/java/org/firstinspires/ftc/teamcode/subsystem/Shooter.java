@@ -13,7 +13,6 @@ public class Shooter implements Subsystem{
 
     public enum ShooterStates {IDLE, SHOOTING_POWER, SHOOTING_VELO}
     public final DcMotorEx shooterRight;
-   // public final DcMotorEx shooterLeft;
     public final Servo angleAdjuster;
 
     final VoltageSensor batteryVoltage;
@@ -56,7 +55,6 @@ public class Shooter implements Subsystem{
     public void update() {
         switch (state) {
             case IDLE:
-//                setPower(0);
                 setTargetVelo(0);
                 setAdjusterPose(adjPose);
                 break;

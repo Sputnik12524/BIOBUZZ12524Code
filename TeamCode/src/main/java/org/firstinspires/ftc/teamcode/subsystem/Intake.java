@@ -31,7 +31,6 @@ public class Intake implements Subsystem {
 
     public void stop() {
         setState(STATES.IDLE);
-        intake.setPower(0);
     }
 
     public void setState(STATES state) {

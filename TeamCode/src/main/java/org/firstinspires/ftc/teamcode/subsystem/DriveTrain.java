@@ -73,13 +73,13 @@ public class DriveTrain implements Subsystem {
     public void update() {
         switch (state) {
             case IDLE:
-                setStopMotors();
+                stopMotors();
                 blockerFront.setPosition(POSITION_FOR_REMOVAL);
                 blockerBack.setPosition(POSITION_FOR_REMOVAL);
                 break;
 
             case BLOCKER_FOR_SHOT:
-                setStopMotors();
+                stopMotors();
                 blockerFront.setPosition(POSITION_FOR_SHOOT);
                 blockerBack.setPosition(POSITION_FOR_SHOOT);
                 break;
@@ -106,7 +106,7 @@ public class DriveTrain implements Subsystem {
         this.state = state;
     }
 
-    public void setStopMotors() {
+    public void stopMotors() {
         leftFront.setPower(0);
         leftBack.setPower(0);
         rightFront.setPower(0);
@@ -119,7 +119,7 @@ public class DriveTrain implements Subsystem {
             rightFront.setPower(POWER);
             rightBack.setPower(POWER);
         }
-        setStopMotors();
+        stopMotors();
     }
     public double centiToPulses(double distance) {
         return distance * PULSES / (Math.PI * WHEEL_DIAMETER);

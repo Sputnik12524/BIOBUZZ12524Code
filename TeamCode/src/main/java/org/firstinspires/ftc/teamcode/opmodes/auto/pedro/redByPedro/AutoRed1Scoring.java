@@ -38,7 +38,7 @@ public class AutoRed1Scoring extends LinearOpMode {
         Scheduler.reset();
 
         waitForStart();
-        schedule(autoRoutine /*curvePath*/());
+        schedule(autoRoutine());
         while (opModeIsActive()) {
             follower.update();
             Scheduler.execute();

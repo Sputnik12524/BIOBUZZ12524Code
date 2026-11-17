@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.subsystem.Shooter;
 
-@TeleOp(name = "servoTest", group = "test")
+@TeleOp(name = "ServoTest", group = "test")
 @Config
 public class ServoTest extends LinearOpMode {
 
