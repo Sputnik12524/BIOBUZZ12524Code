@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.input;
 
 import org.firstinspires.ftc.teamcode.command.Command;
+import org.firstinspires.ftc.teamcode.command.CommandBindings;
 import org.firstinspires.ftc.teamcode.command.Scheduler;
 
 import java.util.ArrayList;
