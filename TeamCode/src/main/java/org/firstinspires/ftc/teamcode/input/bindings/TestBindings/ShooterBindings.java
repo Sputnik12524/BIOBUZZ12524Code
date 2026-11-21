@@ -1,17 +1,18 @@
-package org.firstinspires.ftc.teamcode.input.bindings;
+package org.firstinspires.ftc.teamcode.input.bindings.TestBindings;
 
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.command.commands.IntakeCommand;
+import org.firstinspires.ftc.teamcode.command.commands.ShooterCommand;
 import org.firstinspires.ftc.teamcode.input.BindingMode;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
-import org.firstinspires.ftc.teamcode.subsystem.Intake;
+import org.firstinspires.ftc.teamcode.input.Binding;
+import org.firstinspires.ftc.teamcode.subsystem.Shooter;
 
 
-public class IntakeBindings extends Binding {
+public class ShooterBindings extends Binding {
     Robot robot;
     GamepadManager gamepad;
 
-    public IntakeBindings(
+    public ShooterBindings(
             Robot robot,
             GamepadManager gamepad
     ) {
@@ -24,12 +25,12 @@ public class IntakeBindings extends Binding {
         bind(
                 gamepad.A,
                 BindingMode.TOGGLE,
-                () -> new IntakeCommand(robot.in, Intake.STATES.IN)
+                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_VELO)
         );
         bind(
                 gamepad.B,
                 BindingMode.TOGGLE,
-                () -> new IntakeCommand(robot.in, Intake.STATES.OUT)
+                () -> new ShooterCommand(robot.sh, Shooter.ShooterStates.SHOOTING_POWER)
         );
     }
 }

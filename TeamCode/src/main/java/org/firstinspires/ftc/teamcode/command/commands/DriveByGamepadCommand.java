@@ -35,8 +35,19 @@ public class DriveByGamepadCommand implements Command {
     }
 
     @Override
+    public boolean canInterrupt() {
+        return false;
+    }
+
+    @Override
+    public int getPriority(){
+        return 80;
+    }
+
+    @Override
     public void execute() {
-        dt.setPower(-gamepad1.leftStickY(), gamepad1.leftStickX(), (gamepad1.rightTrigger() - gamepad1.leftTrigger()));
+        dt.setState(DriveTrain.DriveState.DRIVE);
+        dt.setNewTargetPower(-gamepad1.leftStickY(), gamepad1.leftStickX(), (gamepad1.rightTrigger() - gamepad1.leftTrigger()));
     }
 
     @Override

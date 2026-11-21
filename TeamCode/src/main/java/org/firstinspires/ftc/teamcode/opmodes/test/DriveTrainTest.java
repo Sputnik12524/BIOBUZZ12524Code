@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.teamcode.command.commands.DriveByGamepadCommand;
-import org.firstinspires.ftc.teamcode.input.bindings.DriveTrainBindings;
+import org.firstinspires.ftc.teamcode.input.bindings.TestBindings.DriveTrainBindings;
 
 @TeleOp(name = "DriveTrain and blockers test", group = "1")
 

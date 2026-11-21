@@ -5,10 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.input.bindings.ShooterBindings;
+import org.firstinspires.ftc.teamcode.input.bindings.TestBindings.ShooterBindings;
 
 
-@TeleOp(name = "Shooter Velo Test", group = "test")
+@TeleOp(name = "Shooter Power Test", group = "test")
 @Config
 public class ShooterTest extends LinearOpMode {
     Robot robot;
