@@ -6,30 +6,37 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.event.EventBus;
+import org.firstinspires.ftc.teamcode.event.Subscription;
+import org.firstinspires.ftc.teamcode.event.events.PollenInTransferEvent;
+import org.firstinspires.ftc.teamcode.event.events.TransferOvercrowdedEvent;
+
 public class Transfer implements Subsystem {
     private final double POWER_IN = -1;
     private final double POWER_OUT = -1;
     private final double OPEN = 1;
     private final double CLOSE = -1;
 
-    public enum STATES {IDLE, IN, OUT, SHOOTING}
+    public boolean pollenDetected = false;        //визуализация работы датчика
+    private boolean wasPollenDetected = false; // чтобы избежать публикации события на каждом цикле
+    public int count = 0;
+
+    public enum STATES {IDLE, IN, OUT}
 
     STATES state = STATES.IDLE;
 
-    private final DcMotorEx motor;
-    private final DcMotorEx motorExtra;
-    private final Servo servo;
-//    private final CRServo servoLeft;
-//    private final CRServo servoRight;
+    private final DcMotorEx transfer;
+    private final EventBus eventBus;
+    private final Subscription pollenInTransferEvent;
 
-    public Transfer(HardwareMap hardwareMap) {
-        motor = hardwareMap.get(DcMotorEx.class, "transfer");
-        motorExtra = hardwareMap.get(DcMotorEx.class, "motorExtra");
-        servo = hardwareMap.get(Servo.class, "transfer_servo");
-//        servoLeft = hardwareMap.get(CRServo.class, "transfer_servoL");
-//        servoRight = hardwareMap.get(CRServo.class, "transfer_servoR");
-//
-//        servoRight.setDirection(DcMotorSimple.Direction.REVERSE);
+    public Transfer(HardwareMap hardwareMap, EventBus eventBus) {
+        this.eventBus = eventBus;
+        transfer = hardwareMap.get(DcMotorEx.class, "transfer");
+         pollenInTransferEvent = eventBus.subscribe(PollenInTransferEvent.class, event -> { // Конечно шина событий используется для взаимодействий между подсистемами, а не внутри одной, но у меня только трансфер
+            if (event.getCount() > 3) eventBus.publish(new TransferOvercrowdedEvent());
+        });
+        pollenInTransferEvent.unsubscribe();
+
     }
 
     @Override
@@ -41,7 +48,20 @@ public class Transfer implements Subsystem {
         closeServo();
     }
 
-    @Override
+    public void stop() {
+        setState(STATES.IDLE);
+        transfer.setPower(0);
+    }
+
+    private void pollenDetect() {
+        if (pollenDetected && !wasPollenDetected) eventBus.publish(new PollenInTransferEvent(3));
+        wasPollenDetected = pollenDetected;
+    }
+
+    public void setState(STATES state) {
+        this.state = state;
+    }
+
     public void update() {
         switch (state) {
             case IDLE:
@@ -73,7 +93,7 @@ public class Transfer implements Subsystem {
                 openServo();
                 break;
         }
-
+        pollenDetect();
     }
 
     @Override
