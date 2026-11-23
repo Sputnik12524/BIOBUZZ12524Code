@@ -1,17 +1,18 @@
-package org.firstinspires.ftc.teamcode.input.bindings;
+package org.firstinspires.ftc.teamcode.input.bindings.TestBindings;
 
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.command.commands.TransferCommand;
+import org.firstinspires.ftc.teamcode.command.commands.IntakeCommand;
 import org.firstinspires.ftc.teamcode.input.BindingMode;
 import org.firstinspires.ftc.teamcode.input.GamepadManager;
-import org.firstinspires.ftc.teamcode.subsystem.Transfer;
+import org.firstinspires.ftc.teamcode.input.Binding;
+import org.firstinspires.ftc.teamcode.subsystem.Intake;
 
 
-public class TransferBindings extends Binding {
+public class IntakeBindings extends Binding {
     Robot robot;
     GamepadManager gamepad;
 
-    public TransferBindings(
+    public IntakeBindings(
             Robot robot,
             GamepadManager gamepad
     ) {
@@ -24,12 +25,12 @@ public class TransferBindings extends Binding {
         bind(
                 gamepad.A,
                 BindingMode.TOGGLE,
-                () -> new TransferCommand(robot.tr, Transfer.STATES.IN)
+                () -> new IntakeCommand(robot.in, Intake.STATES.IN)
         );
         bind(
                 gamepad.B,
                 BindingMode.TOGGLE,
-                () -> new TransferCommand(robot.tr, Transfer.STATES.OUT)
+                () -> new IntakeCommand(robot.in, Intake.STATES.OUT)
         );
     }
 }
