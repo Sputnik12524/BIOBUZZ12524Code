@@ -3,10 +3,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.input.bindings.IntakeBindings;
+import org.firstinspires.ftc.teamcode.input.bindings.TestBindings.IntakeBindings;
 
 
-@TeleOp(name = "Inake Test", group = "test")
+@TeleOp(name = "Intake Test", group = "test")
 public class IntakeTest extends LinearOpMode {
     Robot robot;
     IntakeBindings bindings;
