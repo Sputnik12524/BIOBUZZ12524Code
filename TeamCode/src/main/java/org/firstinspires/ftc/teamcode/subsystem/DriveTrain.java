@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.event.EventBus;
+
 public class DriveTrain implements Subsystem {
 
     public static double POSITION_FOR_SHOOT = 0.08; //При тесте подошло 0.08, но был 1 блокиратор. Нужен тест для второго
@@ -27,9 +29,9 @@ public class DriveTrain implements Subsystem {
     public final DcMotorEx rightBack;
     public final Servo blockerFront;
     public final Servo blockerBack;
-
-
-    public DriveTrain(HardwareMap hardwareMap) {
+     EventBus eventBus;
+    public DriveTrain(HardwareMap hardwareMap, EventBus eventBus) {
+        this.eventBus = eventBus;
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");

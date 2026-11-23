@@ -22,7 +22,7 @@ public class Robot {
     public final DriveTrain dt;
     public final Shooter sh;
     public final Transfer tr;
-    public  final Intake in;
+    public final Intake in;
     public final GamepadManager gamepad1;
     public final GamepadManager gamepad2;
     public final EventBus eventBus;
@@ -33,12 +33,18 @@ public class Robot {
         gamepad1 = new GamepadManager(rawGamepad1);
         gamepad2 = new GamepadManager(rawGamepad2);
         scheduler = new Scheduler();
+        dt = new DriveTrain(hardwareMap, eventBus);
+        sh = new Shooter(hardwareMap, eventBus);
+        in = new Intake(hardwareMap, eventBus);
         tr = new Transfer(hardwareMap, eventBus);
         subsystem.add(tr);
+        subsystem.add(dt);
+        subsystem.add(sh);
+        subsystem.add(in);
         coordinator = new Coordinator(eventBus, this);
     }
 
-    public void updateInput(){
+    public void updateInput() {
         gamepad1.update();
         gamepad2.update();
     }

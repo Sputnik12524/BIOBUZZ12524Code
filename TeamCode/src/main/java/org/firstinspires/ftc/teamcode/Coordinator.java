@@ -17,8 +17,7 @@ public class Coordinator {
     }
 
     private void subscribe() {
-        eventBus.subscribe(TransferOvercrowdedEvent.class,
-                event -> robot.scheduler.schedule(
-                        new TransferCommand(robot.tr, Transfer.STATES.IDLE)));
     }
+
+
 }

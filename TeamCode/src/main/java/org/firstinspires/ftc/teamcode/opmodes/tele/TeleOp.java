@@ -19,7 +19,7 @@ public class TeleOp extends LinearOpMode {
         robot.init();
         binding.configure();
         waitForStart();
-        robot.scheduler.schedule(new DriveByGamepadCommand(robot));
+        robot.scheduler.addCommand(new DriveByGamepadCommand(robot));
 
         while (opModeIsActive()) {
             robot.update();

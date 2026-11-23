@@ -21,7 +21,7 @@ public class DriveTrainTest extends LinearOpMode {
         robot.init();
         driveTrainBindings.configure();
 
-        robot.scheduler.schedule(new DriveByGamepadCommand(robot));
+        robot.scheduler.addCommand(new DriveByGamepadCommand(robot));
 
         waitForStart();
         while (opModeIsActive()) {

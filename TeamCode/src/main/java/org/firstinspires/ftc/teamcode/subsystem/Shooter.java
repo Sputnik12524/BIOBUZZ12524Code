@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 
+import org.firstinspires.ftc.teamcode.event.EventBus;
+
 @Config
 public class Shooter implements Subsystem{
 
@@ -32,7 +34,15 @@ public class Shooter implements Subsystem{
     public static PIDFCoefficients pidfCoefficients = new PIDFCoefficients(1.4,0,0,14.14);
 
     public ShooterStates state = ShooterStates.IDLE;
+    EventBus eventBus;
 
+    public Shooter(HardwareMap hardwareMap, EventBus eventBus) {
+        this.eventBus = eventBus;
+        shooterRight = hardwareMap.get(DcMotorEx.class, "shooterUp");
+        angleAdjuster = hardwareMap.get(Servo.class, "adjuster");
+
+        batteryVoltage = hardwareMap.voltageSensor.iterator().next();
+    }
     public Shooter(HardwareMap hardwareMap) {
         shooterRight = hardwareMap.get(DcMotorEx.class, "shooterUp");
         angleAdjuster = hardwareMap.get(Servo.class, "adjuster");

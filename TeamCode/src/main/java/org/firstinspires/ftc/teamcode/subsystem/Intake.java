@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-
+import org.firstinspires.ftc.teamcode.event.EventBus;
 
 
 public class Intake implements Subsystem {
@@ -17,8 +17,10 @@ public class Intake implements Subsystem {
     STATES state = STATES.IDLE;
 
     private final DcMotorEx intake;
+    EventBus eventBus;
 
-    public Intake(HardwareMap hardwareMap) {
+    public Intake(HardwareMap hardwareMap, EventBus eventBus) {
+        this.eventBus = eventBus;
         intake = hardwareMap.get(DcMotorEx.class, "intake");
     }
 
