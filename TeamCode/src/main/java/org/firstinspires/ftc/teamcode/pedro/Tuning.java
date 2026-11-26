@@ -18,11 +18,11 @@ public class Tuning {
 
     @Tuner
     public static Procedure tests() {               //Тест для проверки управления кб
-        return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.driveConfig), null, null);
+        return new Tests(hardwareMap -> new Mecanum(hardwareMap, Constants.drivetrainConfig), null, null);
     }
 
-    @Tuner
-    public static Procedure pinpointTuner() {
-        return new PinpointTuner();
-    }
+//    @Tuner
+//    public static Procedure pinpointTuner() {
+//        return new PinpointTuner();
+//    }
 }

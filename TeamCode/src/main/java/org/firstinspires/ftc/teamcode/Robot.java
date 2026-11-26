@@ -37,10 +37,10 @@ public class Robot {
         sh = new Shooter(hardwareMap, eventBus);
         in = new Intake(hardwareMap, eventBus);
         tr = new Transfer(hardwareMap, eventBus);
-        subsystem.add(tr);
+      //  subsystem.add(tr);
         subsystem.add(dt);
-        subsystem.add(sh);
-        subsystem.add(in);
+     //   subsystem.add(sh);
+     //   subsystem.add(in);
         coordinator = new Coordinator(eventBus, this);
     }
 

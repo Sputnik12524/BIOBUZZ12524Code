@@ -27,17 +27,17 @@ public class DriveTrain implements Subsystem {
     public final DcMotorEx leftBack;
     public final DcMotorEx rightFront;
     public final DcMotorEx rightBack;
-    public final Servo blockerFront;
-    public final Servo blockerBack;
-     EventBus eventBus;
+//    public final Servo blockerFront;
+//    public final Servo blockerBack;
+//     EventBus eventBus;
     public DriveTrain(HardwareMap hardwareMap, EventBus eventBus) {
-        this.eventBus = eventBus;
+       // this.eventBus = eventBus;
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFront");
         leftBack = hardwareMap.get(DcMotorEx.class, "leftBack");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBack");
-        blockerFront = hardwareMap.get(Servo.class, "blockerServoFront");
-        blockerBack = hardwareMap.get(Servo.class, "blockerServoBack");
+//        blockerFront = hardwareMap.get(Servo.class, "blockerServoFront");
+//        blockerBack = hardwareMap.get(Servo.class, "blockerServoBack");
     }
 
     public void init() {
@@ -74,17 +74,17 @@ public class DriveTrain implements Subsystem {
     @Override
     public void update() {
         switch (state) {
-            case IDLE:
-                stopMotors();
-                blockerFront.setPosition(POSITION_FOR_REMOVAL);
-                blockerBack.setPosition(POSITION_FOR_REMOVAL);
-                break;
-
-            case BLOCKER_FOR_SHOT:
-                stopMotors();
-                blockerFront.setPosition(POSITION_FOR_SHOOT);
-                blockerBack.setPosition(POSITION_FOR_SHOOT);
-                break;
+//            case IDLE:
+//                stopMotors();
+//                blockerFront.setPosition(POSITION_FOR_REMOVAL);
+//                blockerBack.setPosition(POSITION_FOR_REMOVAL);
+//                break;
+//
+//            case BLOCKER_FOR_SHOT:
+//                stopMotors();
+//                blockerFront.setPosition(POSITION_FOR_SHOOT);
+//                blockerBack.setPosition(POSITION_FOR_SHOOT);
+//                break;
 
             case DRIVE:
                 setPower(power_main, power_side, power_rotate);
